@@ -1,0 +1,5 @@
+# node 
+node_modules
+
+# OS 
+.DS_Store 
