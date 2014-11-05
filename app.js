@@ -1,6 +1,7 @@
 /* basic setup */ 
 var express = require('express');
-var app = module.exports = express();
+var app = module.exports = express(
+	express.static(__dirname + '/public'));
 var port    = 	process.env.PORT || 8080;
 var router = express.Router();
 var static_pages = require('./app/static'); 
