@@ -2,7 +2,7 @@
 var express = require('express');
 var mysql = require('mysql'); 
 var connection = require('express-myconnection'); 
-var app = module.exports = express(); 
+var app   = module.exports = express(); 
 var port         = 	process.env.PORT || 8080;
 var router       = express.Router();
 var static_pages = require('./app/static'); 
