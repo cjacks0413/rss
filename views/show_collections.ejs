@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> My Collections </title>
+		<% include partials/head %>
+	</head>
+	<body>
+		<header>
+			<h1>My Collections </h1>
+			<% include partials/header %>
+		</header>
+		<% for(var i = 0; i < collections.length; i++) { %>
+			<div class="col-md-6 portfolio-item">
+				<a href=<%="/collection/" + collections[i]["id"] %> >
+					<img class="img-responsive" id="collection-img" src="img/news-image.png" alt="">
+				</a>
+				<h3>
+					<%= collections[i]["name"] %> 
+				</h3>
+			</div>				
+		<% }; %> 
+	</body>
+</html>
