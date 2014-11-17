@@ -15,7 +15,9 @@
     "express": "^4.10.1",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.9.1",
+    "feedparser": "^0.19.2",
     "mysql": "^2.5.3",
-    "passport": "^0.2.1"
+    "passport": "^0.2.1",
+    "request": "^2.48.0"
   }
 }
