@@ -1,3 +1,8 @@
+/* USER.JS 
+ * TODO: 
+ * 	- create user
+ * 	- log in / log out
+ */
 var express = require ('express'); 
 var app = require('../app');
 var db = require('../app/db'); 
@@ -16,7 +21,5 @@ user.get('/user/:id', function(req, res) {
 	res.send('looking for user number ' + req.params.id); 
 });
 
-
-//user.post('/user', db.createUser); 
 
 module.exports = user; 

@@ -9,13 +9,12 @@
 	<body>
 		<div id="wrapper">
 			<%include partials/feed-header %> 
-		    <!-- Page Content -->
 		    <div id="page-content-wrapper">
 		        <div class="container-fluid">
 		            <div class="row">
-		        		<!-- Sidebar -->
 						<div id="sidebar-wrapper">
 						    <ul class="sidebar-nav">
+					<!-- TODO: render visualizations (hidden divs when not selected) -->
 						        <li>
 						            <a href= <%="/visualize/" + collection%> > Word Cloud</a>
 						        </li>
@@ -31,6 +30,7 @@
 		                    <h1>Visualize Feeds</h1> 
 		                    <p> Click through the options on the left in order to visualize your RSS feeds
 		                    	in different ways.</p> 
+		             <!-- TODO : make button pretty/in different location --> 
 		                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 		                </div>
 		            </div>
