@@ -30,13 +30,27 @@ module.exports.find_user_by_id = function(id) {
 	})
 }
 
-//TODO: 
 module.exports.create_collection = function(req, res) {
+	var user_id = 1; //take from session ID 
+	var collection = { name : req.body.name, userid : user_id }; 
+	connection.query('INSERT INTO collections SET ?', collection, function(err, result) {
+		if (err) throw err;
+		console.log("Inserted new collection into collections"); 
+	}); 
+	// TODO: REDIRECT? 
+	res.send("Created new collection"); 
 }
 
-
+/* create feed route needs to include collection id */ 
 module.exports.create_feed = function(req, res) {
-
+	var collection_id = req.body.collection_id; 
+	var feed = { name : req.body.name, collection_id : collection_id }; 
+	connection.query('INSERT INTO feeds SET ?', feed, function(err, result) {
+		if (err) throw err;
+		console.log("Inserted new feeds into feeds"); 
+	})
+	// TODO: REDIRECT 
+	res.send("created new feed"); 
 }
 
 
