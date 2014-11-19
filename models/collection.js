@@ -1,11 +1,14 @@
+/* COLLECTION.JS 
+ * TODO: 
+ *  - use middleware (req, res, next) for db functionality
+ *  - create/edit collection 
+ */
 var express = require('express'); 
 var app = require('../app');
 var db = require('../app/db');
 
 var collections = express.Router(); 
 
-/* TODO: Grab user ID from current session.
-   TODO: turn this into middleware so db stuff can stay in db.js */ 
    
 collections.get('/collections', function(req, res) {
 	var id = 1; // take from curent session 

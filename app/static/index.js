@@ -1,3 +1,8 @@
+/* STATIC PAGES
+ * pages that do not access the database, such as
+ * home, about, contact us. 
+ * also good for testing basic routes. 
+ */ 
 var express = require('express'); 
 var app = require('../../app');
 var static_routes = express.Router(); 

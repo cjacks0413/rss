@@ -1,3 +1,6 @@
+/* DATABASE 
+ * 
+ */ 
 var mysql = require('mysql'); 
 var bcrypt = require('bcrypt-nodejs');
 var app = require('../app'); 

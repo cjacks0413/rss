@@ -1,4 +1,4 @@
-/* index file for visualizations 
+/* VIZ_INDEX  
  * while models and user interaction is being developed, visualizations are accessible 
  * via localhost/NAME_OF_VIZ
  * eventually, they will be called within the app only via the collection model
@@ -17,14 +17,6 @@ app.set('views', 'views');
 app.use("/css", express.static('../../public/css'));
 app.use("/views", express.static('../../views'));
 
-/* TODO: turn into middleware so can be called from db.js */ 
-
-function find_feeds_by_id(collection_id, type) {
-	db.connection.query('SELECT name, id FROM feeds WHERE collection_id = ?', collection_id, function(err, f) {
-		if (err) throw err;
-		visualize(id); 
-	});
-}
 
 visualizations.get('/visualize/:id', function(req, res) {
 	id = req.params.id; 
@@ -33,6 +25,11 @@ visualizations.get('/visualize/:id', function(req, res) {
 		res.send("Visualizing..."); 
 	});
 })
+
+/* FOR TESTING 
+   to render a view: res.render
+   to render javascript/html written in this file: res.send 
+*/ 
 
 visualizations.get('/wordcloud', function(req, res) {
 

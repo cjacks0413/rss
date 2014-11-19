@@ -1,4 +1,8 @@
-/* basic setup */ 
+/* BASIC SETUP  
+ * connects routes from app/ and models/ 
+ * order matters: if one route depends on another, 
+ * it must be included first. 
+ */ 
 var express = require('express');
 var bodyParser = require('body-parser');
 var connection = require('express-myconnection'); 
