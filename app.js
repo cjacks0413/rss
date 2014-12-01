@@ -24,11 +24,13 @@ var static_pages = require('./app/static');
 var user         = require('./models/user'); 
 var viz			 = require('./app/visualizations'); 
 var collections  = require('./models/collection'); 
+var auth 		 = require('./app/auth'); 
 
 app.set('view engine', 'ejs'); 
 app.use(static_pages); 
 app.use(user);
 app.use(viz); 
 app.use(collections); 
+app.use(auth); 
 app.listen(port); 
 console.log("Listening on port " + port); 

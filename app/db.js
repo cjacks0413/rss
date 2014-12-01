@@ -3,7 +3,10 @@
  */ 
 var mysql = require('mysql'); 
 var bcrypt = require('bcrypt-nodejs');
+var salt = bcrypt.genSaltSync(10);
 var app = require('../app'); 
+var session = require('express-session');
+var cookieParser = require('cookie-parser')
 var collection = require('../models/collection'); 
 var connection = module.exports.connection = mysql.createConnection({
 	host: 'localhost',
@@ -14,22 +17,42 @@ var connection = module.exports.connection = mysql.createConnection({
 });
 
 module.exports.create_user = function(req, res) {
-	bcrypt.hash(req.body.password, bCrypt.genSaltSync(10), null, function(err, hash) {
+	bcrypt.hash(req.body.password, bcrypt.genSaltSync(10), null, function(err, hash) {
 		if (err) throw err; 
-		var post = { username : req.body.user, password : hash}; 
+		var post = { username : req.body.username, password : hash}; 
 		connection.query('INSERT INTO users SET ?', post, function(err, result) {
 			if (err) throw err; 
 			console.log("Inserted: ", result, " into users"); 
+			req.session.user_id = result.insertId // check if this works
+			res.redirect('/'); // {user : user } 
 		});
 	});
-	res.send("Created new account!"); 
+
 };
 
-module.exports.find_user_by_id = function(id) {
-	connection.query('SELECT * FROM users WHERE id = ?', id, function(err, user) {
+
+module.exports.find_user_by_id = function(req, res) {
+	var username = req.body.username; 
+	var password = req.body.password; 
+	// var password = bcrypt.hash(req.body.password, bcrypt.genSaltSync(10, null, function(err, hash) {
+	// 	if (err) throw err;
+	// 	return hash; 
+	// }));
+
+	connection.query('SELECT * FROM users WHERE username = ?', username, function(err, user) {
 		if (err) throw err;
-		console.log("Found user with id ", id); 
-		return user; 
+		if (user.length > 0) {
+			if (bcrypt.compareSync(password, user[0].password)) {
+				req.session.user_id = user[0].id;
+				res.redirect('/');
+			} else {
+				/* TODO : FLASH something here.  */ 
+				res.redirect('/login')
+			}
+		} else {
+			res.send("sorry, can't find that account"); 			
+		}
+		
 	})
 }
 
