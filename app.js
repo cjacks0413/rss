@@ -11,7 +11,8 @@ var app   = module.exports = express(
 	bodyParser.urlencoded({
     extended: true
 	}));
-
+var flash = require('connect-flash'); 
+app.use(flash());
 app.use(bodyParser()); 
 var path 		 = require('path'); 
 app.use(express.static(path.join(__dirname, 'public')));

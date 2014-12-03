@@ -9,6 +9,12 @@
       	</header>
 		<div class="container">
 			<h2>Sign in</h2>
+			<% if (login_error != "")  { %> 
+				<div class="alert alert-warning">
+					<%= login_error %>  
+				</div> 
+			<% } %> 
+
 			<form action="/login" method="post">
 				<% include partials/user_form %> 
 			</form> 

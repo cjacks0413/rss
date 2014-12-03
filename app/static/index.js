@@ -8,21 +8,20 @@ var app = require('../../app');
 var session = require('express-session'); 
 var static_routes = express.Router(); 
 var bodyParser = require('body-parser');
-
-var sess; 
+var auth = require('../auth'); 
 app.set('views', 'views'); 
 
-app.use(session({secret: 'mySecretKey', 
+
+app.use(session({secret: 'otisBarn', 
 				 saveUninitialized : true, 
 				 resave : true}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 static_routes.get('/', function(req, res) {
-	sess = req.session; 
-	console.log(sess);
-	if (sess.user_id) {
-		console.log(sess.id); 
+	if (req.session.user_id) {
+		res.locals.signed_in = true; 
 		res.render('home'); 
 	} else {
 		/* TODO: actually redirect to something */ 

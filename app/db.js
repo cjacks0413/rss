@@ -1,5 +1,5 @@
 /* DATABASE 
- * 
+ *  TODO : make user a unique key
  */ 
 var mysql = require('mysql'); 
 var bcrypt = require('bcrypt-nodejs');
@@ -8,6 +8,7 @@ var app = require('../app');
 var session = require('express-session');
 var cookieParser = require('cookie-parser')
 var collection = require('../models/collection'); 
+var flash = require('connect-flash');
 var connection = module.exports.connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'rss_admin',
@@ -30,31 +31,27 @@ module.exports.create_user = function(req, res) {
 
 };
 
-
+/* 
 module.exports.find_user_by_id = function(req, res) {
 	var username = req.body.username; 
 	var password = req.body.password; 
-	// var password = bcrypt.hash(req.body.password, bcrypt.genSaltSync(10, null, function(err, hash) {
-	// 	if (err) throw err;
-	// 	return hash; 
-	// }));
-
+	req.flash('login-success', 'You have been logged in!'); 
+	req.flash('login-failure', 'That username and password combination cannot be found. Please try again.'); 
 	connection.query('SELECT * FROM users WHERE username = ?', username, function(err, user) {
 		if (err) throw err;
 		if (user.length > 0) {
 			if (bcrypt.compareSync(password, user[0].password)) {
 				req.session.user_id = user[0].id;
-				res.redirect('/');
+				res.redirect('/', { message : "You have been logged in!"});
 			} else {
-				/* TODO : FLASH something here.  */ 
-				res.redirect('/login')
+				res.redirect('/login', { message : "That username and password combination cannot be found. Please try again."})
 			}
 		} else {
-			res.send("sorry, can't find that account"); 			
+			res.redirect('/login', { message : "That username and password combination cannot be found. Please try again." })
 		}
 		
 	})
-}
+} */ 
 
 module.exports.create_collection = function(req, res) {
 	var user_id = 1; //take from session ID 
