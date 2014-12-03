@@ -31,51 +31,6 @@ module.exports.create_user = function(req, res) {
 
 };
 
-/* 
-module.exports.find_user_by_id = function(req, res) {
-	var username = req.body.username; 
-	var password = req.body.password; 
-	req.flash('login-success', 'You have been logged in!'); 
-	req.flash('login-failure', 'That username and password combination cannot be found. Please try again.'); 
-	connection.query('SELECT * FROM users WHERE username = ?', username, function(err, user) {
-		if (err) throw err;
-		if (user.length > 0) {
-			if (bcrypt.compareSync(password, user[0].password)) {
-				req.session.user_id = user[0].id;
-				res.redirect('/', { message : "You have been logged in!"});
-			} else {
-				res.redirect('/login', { message : "That username and password combination cannot be found. Please try again."})
-			}
-		} else {
-			res.redirect('/login', { message : "That username and password combination cannot be found. Please try again." })
-		}
-		
-	})
-} */ 
-
-module.exports.create_collection = function(req, res) {
-	var user_id = 1; //take from session ID 
-	var collection = { name : req.body.name, userid : user_id }; 
-	connection.query('INSERT INTO collections SET ?', collection, function(err, result) {
-		if (err) throw err;
-		console.log("Inserted new collection into collections"); 
-	}); 
-	// TODO: REDIRECT? 
-	res.send("Created new collection"); 
-}
-
-/* create feed route needs to include collection id */ 
-module.exports.create_feed = function(req, res) {
-	var collection_id = req.body.collection_id; 
-	var feed = { name : req.body.name, collection_id : collection_id }; 
-	connection.query('INSERT INTO feeds SET ?', feed, function(err, result) {
-		if (err) throw err;
-		console.log("Inserted new feeds into feeds"); 
-	})
-	// TODO: REDIRECT 
-	res.send("created new feed"); 
-}
-
 
 
 

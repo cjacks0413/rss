@@ -13,11 +13,21 @@
 			<ul class="nav navbar-nav">
 				<!-- name of collection to be passed in --> 
 				<li><a href="/collections">My Collections</a></li>
-				<li><a href="#">[Name of Collection]</a></li>
 				<!-- drop down of feeds belonging to a collection --> 
-				<li><a href="#">Feeds</a></li> 
-				<li><a href="#">Add Feed</a></li> 
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">Feeds<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+								<% for (var i = 0; i < feeds.length; i++) { %> 
+									<li role="presentation"><a><%= feeds[i].name %></a></li>			
+								<% } %>
+								<% if (feeds.length > 0) { %> 
+								    <li role="presentation" class="divider"></li>
+								<% } %> 
+								<li role="presentation"><a href="/create_feed"> Add Feed</a><li>
+					</ul> 
 			</ul>
 		</div>
 	</div>
+
 </nav>

@@ -29,7 +29,7 @@ var auth 		 = require('./app/auth');
 
 app.set('view engine', 'ejs'); 
 app.use(static_pages); 
-app.use(user);
+//app.use(user);
 app.use(viz); 
 app.use(collections); 
 app.use(auth); 
