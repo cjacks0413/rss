@@ -29,6 +29,9 @@ static_routes.get('/', function(req, res) {
 	}
 })
 
-static_routes.get('/')
+static_routes.get('/wordcloud', function(req, res) {
+	res.render('word-cloud-test');
+})
+
 module.exports = static_routes; 
 

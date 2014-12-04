@@ -19,5 +19,8 @@
     "express-session": "^1.9.1",
     "mysql": "^2.5.3",
     "passport": "^0.2.1"
+  } ,
+  "engines" : {
+    "node": "0.10.x"
   }
 }
