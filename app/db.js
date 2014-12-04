@@ -19,7 +19,7 @@ var connection = module.exports.connection = mysql.createConnection({
 });  
 
 
-/*  FOR HEROKU ... */ 
+/*  FOR HEROKU ... 
 var connection = module.exports.connection = mysql.createConnection({ 
 	host: 'us-cdbr-iron-east-01.cleardb.net',
 	user: 'b1159f697a5e90',
