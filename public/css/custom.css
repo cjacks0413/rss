@@ -13,7 +13,7 @@ body {
 	padding: 15px;
 }
 
-#collection-img {
+.collection-img {
 	width: 60%;
 	height: 30%;
 }
@@ -24,3 +24,14 @@ body {
   background-color: rgba(143, 44, 44, 0.9);    
 } 
 
+#arrow-toggle {
+	width:  5%;
+}
+
+.wordcloud {
+	padding: 10px;
+}
+
+#wordcloudviz {
+	visibility: hidden;
+}

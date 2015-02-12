@@ -14,13 +14,14 @@
 						<div id="sidebar-wrapper">
 						    <ul class="sidebar-nav">
 						        <li>
-						            <a href= <%="/visualize/" + collection.id%> > Word Cloud</a>
+						            <a href="#seewordcloud" id="seewordcloud"> Word Cloud</a>
 						        </li>
 						        <li>
-						            <a href= <%="/visualize/" + collection.id%> >Geospatial Visualization</a>
+						            <a href="#geospatial">Geospatial Visualization</a>
 						        </li>
 						        <li>
-						            <a href= <%="/visualize/" + collection.id%> >Sentiment Analysis</a>
+						        	<a href="sentiment">Sentiment Analysis</a> 
+						            <!--<a href= <%= collection.id%> >Sentiment Analysis</a>-->
 						        </li>
 						    </ul>
 						</div>
@@ -28,12 +29,28 @@
 		                    <h1><%=collection.name%></h1> 
 		                    <p> Click through the options on the left in order to visualize your RSS feeds
 		                    	in different ways.</p>
-		                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a
+		                   <a href="#menu-toggle" id="menu-toggle">
+		                   	<img class="img-responsive" id="arrow-toggle" src="/img/double_arrow.png" alt="arrow">
+		                   </a> 
+		                   	<div class="wordcloud">
+		                   		<div id="wordcloudviz">		                   
+		                   		<% include partials/word-cloud-test %></div>
+            				</div>
+            				<div class="geospatial" id="geospatialviz">
+            				</div>
+            				<div class="sentiment" id="sentimentviz">
+            				</div> 
 		                </div>
 		            </div>
 		        </div>
 		    </div>
 		</div> 
+		<script>
+			document.getElementById("seewordcloud").onclick = function() {
+				console.log("yo");
+				document.getElementById("wordcloudviz").style.visibility = "visible";
+			}
+		</script> 
 		<% include partials/footer %> 
 	</body>
 </html>

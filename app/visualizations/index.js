@@ -8,6 +8,11 @@
  * 	  call it in place of the function(req, res) for the given visualization. 
  */
 
+
+
+/*
+ * I DON'T NEED THIS. instead, just do it using # in the UI. 
+ */
 var express = require('express'); 
 var app = require('../../app');
 var visualizations = express.Router(); 

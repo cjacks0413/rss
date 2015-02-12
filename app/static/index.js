@@ -24,13 +24,12 @@ static_routes.get('/', function(req, res) {
 		res.locals.signed_in = true; 
 		res.render('home'); 
 	} else {
-		/* TODO: actually redirect to something */ 
 		res.redirect('/login'); 
 	}
 })
 
 static_routes.get('/wordcloud', function(req, res) {
-	res.render('word-cloud-test');
+	res.render('partials/word-cloud-test');
 })
 
 module.exports = static_routes; 

@@ -6,7 +6,7 @@ var express = require('express');
 var app = require('../app');
 var db = require('../app/db');
 var collections = express.Router(); 
-
+var request = require('request');
    
 collections.get('/collections', function(req, res) {
 	if (req.session.user_id) {
@@ -85,4 +85,38 @@ collections.post('/feed', function(req, res) {
 		res.render('home'); 
 	}
 })
+
+collections.get('/feeds', function(req, res) {
+	if (req.session.user_id) {
+		res.locals.signed_in = true; 
+		res.locals.words = new Array();
+		var collection_id = req.session.collection_id;
+		/* get feed_urls from db */
+		db.connection.query('SELECT link FROM feeds WHERE collection_id = ?', collection_id, function(err, links) {
+			if (err) throw err;
+			concatenateFeeds(links, res.locals);
+		})
+	} else {
+		res.render('home');
+	}
+})
+
+function concatenateFeeds(urls, locals) {
+	var response; 
+	console.log(urls);
+	for (var i = 0; i < urls.length; i++) {
+		response = request("https://tufts.herokuapp.com/rssfeed/?url=" + urls[i].link, function(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				parsedBody = JSON.parse(body);
+				if (parsedBody.status) {
+					locals.words.push(parsedBody.words_count);
+					console.log("right after pushing", locals.words);
+				} 
+			} else {
+				res.send("mistake.");
+			}
+		})
+	}
+}
+
 module.exports = collections; 

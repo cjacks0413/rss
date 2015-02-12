@@ -3,7 +3,7 @@
     <script src="/js/d3.layout.cloud.js"></script>
     <script>
         var fill = d3.scale.category20();
-        d3.layout.cloud().size([300, 300])
+        d3.layout.cloud().size([500, 500])
             .words([
             "Hello", "world", "normally", "you", "want", "more", "words",
             "than", "this"].map(function(d) {
@@ -17,7 +17,7 @@
             .start();
 
         function draw(words) {
-            d3.select("body").append("svg")
+            d3.select("#wordcloudviz").append("svg")
                 .attr("width", 500)
                 .attr("height", 500)
             .append("g")
