@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 auth.get('/login', function(req, res) {
 	res.locals.signed_in = false; 
+	res.locals.words = new Array(); 
 	if (req.session.user_id) {
 		res.redirect('/')
 	} else {

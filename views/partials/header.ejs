@@ -15,7 +15,7 @@
 					<li><a href="/collections">My Collections</a></li>
 					<li><a href="#">My Account </a></li> 
 					<li><a href="/logout">Logout</a></li>
-				<% } else { %> 
+				<% } if (words.length == 0){ %> 
 					<li><a href="/signup">Sign up</a></li>
 					<li><a href="/login">Sign in</a></li> 
 				<% } %> 

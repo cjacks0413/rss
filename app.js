@@ -20,12 +20,18 @@ app.use("/css", express.static('../../public/css'));
 app.use("/img", express.static('../../public/img')); 
 app.use("/js", express.static('../../public/js')); 
 
+
+//gross, global variable for callback mess in collections... 
+
+app.locals.words = new Array();  
+
 var port         = 	process.env.PORT || 8080;
 var static_pages = require('./app/static'); 
 var user         = require('./models/user'); 
 var viz			 = require('./app/visualizations'); 
 var collections  = require('./models/collection'); 
 var auth 		 = require('./app/auth'); 
+var d3 			 = require('d3'); 
 
 app.set('view engine', 'ejs'); 
 app.use(static_pages); 

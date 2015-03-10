@@ -11,10 +11,13 @@ var request = require('request');
 collections.get('/collections', function(req, res) {
 	if (req.session.user_id) {
 		res.locals.signed_in = true; 
+		//res.locals.words = new Array();
 		var id = req.session.user_id; // take from curent session 
 		db.connection.query('SELECT id, name FROM collections WHERE userid = ?', id, function(err, c) {
 			if (err) throw err;
-			res.render('show_collections', { collections : c } ); 
+			app.locals.collections = c; 
+			//res.render('show_collections', { collections : c } ); 
+			res.render('show_collections');
 		})
 	} else {
 		res.render('home'); 
@@ -89,12 +92,12 @@ collections.post('/feed', function(req, res) {
 collections.get('/feeds', function(req, res) {
 	if (req.session.user_id) {
 		res.locals.signed_in = true; 
-		res.locals.words = new Array();
 		var collection_id = req.session.collection_id;
 		/* get feed_urls from db */
 		db.connection.query('SELECT link FROM feeds WHERE collection_id = ?', collection_id, function(err, links) {
 			if (err) throw err;
-			concatenateFeeds(links, res.locals);
+			concatenateFeeds(links, app.locals);
+			res.render('show_collections');
 		})
 	} else {
 		res.render('home');
@@ -109,11 +112,10 @@ function concatenateFeeds(urls, locals) {
 			if (!error && response.statusCode == 200) {
 				parsedBody = JSON.parse(body);
 				if (parsedBody.status) {
-					locals.words.push(parsedBody.words_count);
-					console.log("right after pushing", locals.words);
+					locals.words.push(parsedBody.word_counts);
 				} 
 			} else {
-				res.send("mistake.");
+				locals.words.push("nothing found."); 
 			}
 		})
 	}
